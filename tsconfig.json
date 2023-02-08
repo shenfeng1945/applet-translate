@@ -17,14 +17,9 @@
     "strict": true,
     "strictPropertyInitialization": true,
     "lib": ["ES2020"],
-    "typeRoots": [
-      "./typings"
-    ]
+    "typeRoots": ["./typings"],
+    "outDir": "./"
   },
-  "include": [
-    "./**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "./miniprogram/utils/md5.js"]
 }
