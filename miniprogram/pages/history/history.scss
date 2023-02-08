@@ -1,0 +1,47 @@
+.container {
+  padding: 40rpx 0;
+  display: flex;
+  height: 100vh;
+  .history-title {
+    font-size: 26rpx;
+    line-height: 38rpx;
+    color: #8995a1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 40rpx;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+    border: none;
+    background: #fff;
+  }
+
+  .history-result-list {
+    margin-top: 50rpx;
+    background: #f5fafe;
+    .history-result {
+      margin-top: 40rpx;
+      display: flex;
+      flex-direction: column;
+      &:last-child {
+        margin-bottom: 40rpx;
+      }
+      .query-text {
+        color: #8995a1;
+        padding: 0 40rpx;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .translate-text {
+        margin-top: 16rpx;
+        padding: 0 40rpx;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

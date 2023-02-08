@@ -1,6 +1,15 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:key="timeStamp" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log.date}}</text>
-  </block>
+<view class="container">
+  <text class="history-title">翻译历史</text>
+
+  <scroll-view class="history-result-list">
+    <view class="history-result"
+      wx:for="{{history}}"
+      wx:for-item="historyItem"
+      wx:key="index"
+    >
+     <view class="query-text">{{historyItem.query}}</view>
+     <view class="translate-text">{{historyItem.result}}</view>
+    </view>
+  </scroll-view>
 </view>
