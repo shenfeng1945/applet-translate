@@ -1,23 +1,36 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="jump-page">
+    <navigator url="/pages/change/change">
+      <text class="lang">翻译成{{curLang.chinese}}</text>
+      <text class="iconfont icon-down"></text>
+    </navigator>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="textarea-container">
+    <textarea 
+      placeholder="请输入要翻译的文本"
+      placeholder-style="color: #8995a1"
+      value="{{query}}"
+      bindinput="onInput"
+      class="textarea"
+    ></textarea>
+    <text class="iconfont icon-close"
+      hidden="{{hiddenCloseIcon}}"
+      bindtap="onTapClose"
+    ></text>
+  </view>
+
+  <view class="button-translate">
+    <button class="button" bindtap="onConfirm">点击翻译</button>
+  </view>
+
+  <view class="output-area">
+    <text class="title">译文</text>
+    <view class="result-container">
+      <view class="result">
+        {{translateResult}}
+      </view>
+    </view>
   </view>
 </view>

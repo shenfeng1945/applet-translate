@@ -1,8 +1,14 @@
 /// <reference path="./types/index.d.ts" />
 
+interface lang {
+  lang?: string;
+  index?: number;
+  chinese?: string;
+}
+
 interface IAppOption {
   globalData: {
-    userInfo?: WechatMiniprogram.UserInfo,
-  }
-  userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
+    curLang: lang;
+    langList?: any;
+  };
 }

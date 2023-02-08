@@ -1,19 +1,55 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #aaa;
-}
+.container {
+  .jump-page {
+    display: flex;
+    align-items: center;
+    color: #8995a1;
+    font-size: 24rpx;
+    padding: 20rpx 40rpx;
+    .iconfont {
+      font-size: 20rpx;
+      color: inherit;
+    }
+  }
+  .textarea-container {
+    background: #fff;
+    position: relative;
+    .textarea {
+      padding: 30rpx;
+      padding-right: 0;
+      font-size: 34rpx;
+    }
+    .iconfont {
+      position: absolute;
+      top: 30rpx;
+      right: 40rpx;
+      font-size: 50rpx;
+      color: #888;
+      z-index: 9;
+    }
+  }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
+  .button-translate {
+    display: flex;
+    justify-content: center;
+    .button {
+      margin: 20rpx;
+      font-size: 32rpx;
+      border: 1px solid;
+    }
+  }
 
-.usermotto {
-  margin-top: 200px;
+  .output-area {
+    min-height: 80rpx;
+    background: #fff;
+    padding: 40rpx;
+    .title {
+      font-size: 28rpx;
+      color: #8995a1;
+    }
+    .result-container {
+      padding: 20rpx 0;
+      font-size: 34rpx;
+    }
+  }
 }

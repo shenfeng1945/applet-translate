@@ -1,49 +1,57 @@
+import { translate } from "../../utils/baidu-translate-api";
 // index.ts
 // 获取应用实例
-const app = getApp<IAppOption>()
+const app = getApp<IAppOption>();
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    query: "",
+    hiddenCloseIcon: true,
+    translateResult: "",
+    curLang: <any>{},
   },
-  // 事件处理函数
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs',
-    })
-  },
-  onLoad() {
-    // @ts-ignore
-    if (wx.getUserProfile) {
+  onLoad() {},
+  onShow() {
+    if (this.data.curLang.lang !== app.globalData.curLang.lang) {
       this.setData({
-        canIUseGetUserProfile: true
-      })
+        curLang: app.globalData.curLang,
+      });
     }
   },
-  getUserProfile() {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
-  getUserInfo(e: any) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
+  onInput(e: any) {
+    const { value } = e.detail;
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
-})
+      query: value,
+      hiddenCloseIcon: value === "" ? true : false,
+    });
+  },
+  onConfirm() {
+    const { query } = this.data;
+    const { lang } = this.data.curLang;
+    if (!query) return;
+    translate(query, { from: "auto", to: lang }).then((data: any) => {
+      let history = wx.getStorageSync("history") || [];
+      const result = this.getResult(data);
+      history.unshift({
+        query,
+        result,
+      });
+      wx.setStorageSync(
+        "history",
+        history.length > 10 ? history.slice(0, 9) : history
+      );
+      this.setData({ translateResult: result });
+    });
+  },
+  onTapClose() {
+    this.setData({ query: "", hiddenCloseIcon: true, translateResult: "" });
+  },
+  getResult(data: any) {
+    const resultArray = data.trans_result;
+    const dst: any = [];
+    resultArray.forEach((key: any) => {
+      dst.push(key["dst"]);
+    });
+    return dst.join("\n");
+  },
+});
