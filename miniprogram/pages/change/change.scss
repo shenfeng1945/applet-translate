@@ -1,0 +1,30 @@
+.container {
+  background: #f8f8f8;
+  .title {
+    background: #fff;
+    border-bottom: 1px solid #ececec;
+    padding: 20rpx 40rpx;
+    color: #aaa;
+    font-size: 28rpx;
+  }
+  .lang-wrapper {
+    padding-left: 40rpx;
+    background: #fff;
+    .item {
+      padding: 20rpx 40rpx 20rpx 0;
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px solid #ececec;
+      .lang {
+        flex: 1;
+      }
+      .iconfont {
+        margin-left: auto;
+        color: #aaa;
+        font-size: 50rpx;
+      }
+    }
+  }
+}
